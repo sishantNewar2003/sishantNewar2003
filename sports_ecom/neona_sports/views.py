@@ -1,11 +1,79 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from .models import Product
 
 # Create your views here.
+@login_required(login_url='login')
+
 def hi(request):
     return render(request,'home.html')
 
 
-def login(request):
+def loginpage(request):
+    if request.method=="POST":
+        user_name=request.POST.get('username')
+        pass1=request.POST.get('pass')
+        
+        
+        user=authenticate(request, username=user_name, password=pass1)
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else:
+            return HttpResponse("Your Username or Password is incorrect")  
+           
+
     return render(request,'login.html')
+ 
+
+def signup(request):
+    if request.method=="POST":
+        uname=request.POST.get('username')
+        email=request.POST.get('email')
+        pass1=request.POST.get('password1')
+        pass2=request.POST.get('password2')
+        if pass1!=pass2:
+            return HttpResponse("Your password didn't match")  
+        else:
+           my_user=User.objects.create_user(uname,email,pass1)
+           my_user.save()
+           return redirect('loginpage')
+
+        
+        
+
+    return render(request,'signup.html')    
+
+ 
+def logoutpage(request):
+    logout(request)
+    return redirect('loginpage')
+
+
+def  product(request):
+    product = Product.objects.filter()
+    
+    data = {
+        'product': product
+    }
+
+    return render(request, 'product.html', data)
+    
+
+def cart(request):
+    return render(request, 'cart.html')  
+
+
+def product_detail(request,id):
+    product = Product.objects.filter(id = id).first()
+    context = {
+        'product':product
+    }
+    return render(request, 'product_detail.html', context)
+
+
+
+ 

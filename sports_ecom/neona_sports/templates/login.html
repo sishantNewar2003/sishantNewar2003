@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Login Page</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css'%}"> 
-    <img src="{% static 'images/logo1.png'%}" width="90px">
-    
-
-
+<head>
+    <title>Login Page</title>
 </head>
-<body>
-    <img src="{% static 'images/login.jpg'%}">
+
+<body style="background-image: url('{% static 'images/4.jpg' %}')">
+
+   
+
+   <img src="{% static 'images/logo1.png'%}" width="90px">
 
    <div class="loginbox">
-    <img src="images/logo.png"class="loogo">
+    <img src="{% static 'images/logo.png'%}" class="avatar">
+    
     <h1>Login</h1>
-<form>
+<form method="post">
+    {% csrf_token %}
+
     <p>Username</p>
-    <input type="text" name="" placeholder="Enter Username">
+    <input type="text" name="username" placeholder="Enter Username">
     <p>password</p>
-    <input type="password" name="" placeholder="Enter Password">
+    <input type="password" name="pass" placeholder="Enter Password">
     <input type="submit" name="" value="Login">
     <a href="#"> Forget your password</a><br>
-    <a href="#"> Don't have a Account?</a>
+    <a href="{% url 'signup' %}"> Don't have an Account?</a>
 
 
     
@@ -31,9 +34,9 @@
 
    </div>
 
-    
+   
 
-<h1> </h1>
+
 </div>
 
 </body>

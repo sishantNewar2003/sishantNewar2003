@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    
+</head>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/new.css'%}"> 
+
+<body>
+   
+
+<div class="header">
+<div class="container">
+    <div class="navbar">
+        <img src="{% static 'images/logo1.png'%}">    
+            
+       
+        <nav>
+<ul>
+    <li><a href="home">Home</a></li>
+    <li><a href="">Products</a></li>
+    <li><a href="">About</a></li>
+    <li><a href=""></a>Contact</a></li>
+    <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+    
+
+</ul>
+        </nav>
+     </div>
+     
+     </div>
+
+</div>
+
+{% block content %}
+
+<div class = "products">
+    <div class = "container">
+        <h1 class = "lg-title">Our Products</h1>
+        <p class = "text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quos sit consectetur, ipsa voluptatem vitae necessitatibus dicta veniam, optio, possimus assumenda laudantium. Temporibus, quis cum.</p>
+        {% for prod in product %}
+        <div class = "product-items">
+          
+            <!-- single product -->
+            <div class = "product">
+                <div class = "product-content">
+                    <div class = "product-img">
+                        <img src="/{{product.image}}" alt = "product image">
+                    </div>
+                    <div class = "product-btns">
+                        <button href="" type = "button" class = "btn-cart"> add to cart
+                            <span><i class = "fas fa-plus"></i></span>
+                        </button>
+                        <button type = "button" class = "btn-buy"> buy now
+                            <span><i class = "fas fa-shopping-cart"></i></span>
+                        </button>
+                    </div>
+                </div>
+           
+                <div class = "product-info">
+                    <div class = "product-info-top">
+                        <h2 class = "sm-title">lifestyle</h2>
+                       
+                    </div>
+                    <a href = "{{prod.id}}" class = "product-name">{{prod.name}}</a>
+                    <p class = "product-price">{{prod.sale}}</p>
+                    <p class = "product-price">{{prod.price}}</p>
+                </div>
+            </div>
+            <!-- end of single product -->
+        {% endfor %}   
+        </div>
+    </div>
+</div>
+
+
+<div class = "product-collection">
+    <div class = "container">
+        <div class = "product-collection-wrapper">
+            <!-- product col left -->
+            <div class = "product-col-left flex">
+                <div class = "product-col-content">
+                    <h2 class = "sm-title">men's shoes </h2>
+                    <h2 class = "md-title">men's collection </h2>
+                    <p class = "text-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae consequatur facilis eligendi quibusdam voluptatibus exercitationem autem voluptatum, beatae architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+                    <button type = "button" class = "btn-dark">Shop now</button>
+                </div>
+            </div>
+
+            <!-- product col right -->
+         
+            <div class = "product-col-right">
+                <div class = "product-col-r-top flex">
+                    <div class = "product-col-content">
+                        <h2 class = "sm-title">women's dresses </h2>
+                        <h2 class = "md-title">women's collection </h2>
+                        <p class = "text-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae consequatur facilis eligendi quibusdam voluptatibus exercitationem autem voluptatum, beatae architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+                        <button type = "button" class = "btn-dark">Shop now</button>
+                    </div>
+                </div>
+        
+                
+                <div class = "product-col-r-bottom">
+                    <!-- left -->
+                    <div class = "flex">
+                        <div class = "product-col-content">
+                            <h2 class = "sm-title">summer sale </h2>
+                            <h2 class = "md-title">Extra 50% Off </h2>
+                            <p class = "text-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae consequatur facilis eligendi quibusdam voluptatibus exercitationem autem voluptatum, beatae architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+                            <button type = "button" class = "btn-dark">Shop now</button>
+                        </div>
+                    </div>
+              
+                    <!-- right -->
+                   
+                    <div class = "flex">
+                        <div class = "product-col-content">
+                            <h2 class = "sm-title">shoes </h2>
+                            <h2 class = "md-title">best sellers </h2>
+                            <p class = "text-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae consequatur facilis eligendi quibusdam voluptatibus exercitationem autem voluptatum, beatae architecto odit, quisquam repellat. Deleniti, architecto ab.</p>
+                            <button type = "button" class = "btn-dark">Shop now</button>
+                        </div>
+                    </div>
+              
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+<!-- footer -->
+   
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Shop Here</h3>
+                <ul>
+                    <li>Shoes</li>
+                    <li>T-Shirts</li>
+                    <li>and many more</li>
+                    
+                </ul>
+            </div>
+            <div class="footer-col-2">
+                <h3> Our Motto</h3>
+              
+                <p>Our purpose is to assist you to meet your need for day-to-day in sports.</p>
+            </div>
+            <div class="footer-col-3">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Faqs</li>
+                    <li>Blog Post</li>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+            <div class="footer-col-4">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">Copyright 2023</p>
+    </div>
+</div>   
+
+
+
+
+
+</body>
+</html>
+
