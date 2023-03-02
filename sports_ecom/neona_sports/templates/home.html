@@ -6,6 +6,7 @@
 </head>
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/cart.css'%}"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
    
 
@@ -20,17 +21,17 @@
     <li><a href="">Home</a></li>
     <li><a href="product">Products</a></li>
     <li><a href="product_detail">About</a></li>
-    <li><a href="{% url 'cart' %}">Contact</a></li>
+    <li><a href="#">Contact</a></li>
     <li><a href="loginpage">Account</a></li>
     <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+    <li><a href="cart/cart-detail"><i class="fa fa-shopping-cart" style="font-size:24px"></i><span class="badge bg-secondary">{{request.session.cart|length}}</span></a></li>
 </ul>
 
         </nav>
     
      </div>
 
-    
-        
+<section class="banner">
 <div class="row">
         <div class="col-2">
         <h1>Feel The Product!</h1>
@@ -38,11 +39,9 @@
 <a href="" class="btn">Explore now &#8594</a>
         </div>
 
-        <div class="col-2">
-            <img src="{% static 'images/cover.jpg'%}"> 
-         </div>
-        
+    
 </div>
+</section>
    
 
 </div>

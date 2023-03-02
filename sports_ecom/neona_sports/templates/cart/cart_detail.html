@@ -7,6 +7,8 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/cart.css'%}"> 
 
+{% load cart_tag %}
+
    
 <body>
     
@@ -20,7 +22,7 @@
                
                 <nav>
         <ul>
-            <li><a href="home">Home</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="">Products</a></li>
             <li><a href="">About</a></li>
             <li><a href=""></a>Contact</a></li>
@@ -40,8 +42,13 @@
 
 
 <!-- cart items details -->
-<div class="small-container cart-page">
 
+{% block body%}
+
+    {% for key,value in request.session.cart.items %}
+
+<div class="small-container cart-page">
+    <a href="{% url 'cart_clear' %}">Clear Cart</a>
     <table>
         <tr>
             <th>Product</th>
@@ -51,42 +58,30 @@
         <tr>
             <td>
                 <div class="cart-info">
-                    <img src="{% static 'images/shoe2.jpg'%}">
+                    <img src="/{{value.image}}">
                     <div>
-                        <p>Shoes</p>
-                        <small>Price: Rs.1340</small>
+                        <p>{{value.name}}</p>
+                        <small>Rs. {{value.price}}</small>
                         <br>
-                        <a href="">Remove</a>
+                        <a href="{% url 'item_clear' key %}">Remove</a>
                     </div>
                 </div>
             </td>
-            <td><input type="number" value="1"></td>
-            <td>Rs.1340</td>
+            <td>
+             
+                <input type="number" value="{{value.quantity}}"></td>
+                
+            <td>Rs. {{ value.price|multiply:value.quantity }}</td>
         </tr>
     
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <img src="images/buy-3.jpg">
-                    <div>
-                        <p>shoes</p>
-                        <small>Price: Rs.1230</small>
-                        <br>
-                        <a href="">Remove</a>
-                    </div>
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>Rs.1230</td>
-        </tr>
     </table>
-
+    {% endfor %}
     <div class="total-price">
 
         <table>
             <tr>
                 <td>Subtotal</td>
-                <td>Rs.2570</td>
+                <td>Rs. {{ cart_total_amount }}</td>
             </tr>
             <tr>
                 <td>Delivery charge</td>
@@ -94,7 +89,7 @@
             </tr>
             <tr>
                 <td>Total</td>
-                <td>Rs.2670</td>
+                <td>Rs.  {{ cart_total_amount }}</td>
             </tr>
         </table>
 
@@ -102,6 +97,8 @@
 
 </div>
 
+
+{% endblock %}
 
 <!-- footer -->
    

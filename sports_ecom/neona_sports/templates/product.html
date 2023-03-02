@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{% static 'css/new.css'%}"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
 <body>
    
 
@@ -19,7 +20,7 @@
        
         <nav>
 <ul>
-    <li><a href="home">Home</a></li>
+    <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="">Products</a></li>
     <li><a href="">About</a></li>
     <li><a href=""></a>Contact</a></li>
@@ -38,23 +39,26 @@
 
 <div class = "products">
     <div class = "container">
+
         <h1 class = "lg-title">Our Products</h1>
         <p class = "text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quos sit consectetur, ipsa voluptatem vitae necessitatibus dicta veniam, optio, possimus assumenda laudantium. Temporibus, quis cum.</p>
         {% for prod in product %}
+
+        <div class="small-container">
         <div class = "product-items">
-          
+   
             <!-- single product -->
-            <div class="small-container">
+           
             <div class = "product">
                 <div class = "product-content">
                     <div class = "product-img">
-                        <img src="/{{product.image}}" alt = "product image">
+                        <img src="/{{prod.image.url}}" alt = "product image">
                        
                     </div>
                     <div class = "product-btns">
-                        <button href="" type = "button" class = "btn-cart"> add to cart
-                            <span><i class = "fas fa-plus"></i></span>
-                        </button>
+                        <a href="{% url 'cart_add' prod.id %}" type = "submit-button" class = "btn-cart"> add to cart
+                            <span><i class = "glyphicon glyphicon-plus"></i></span>
+                        </a>
                         <button type = "button" class = "btn-buy"> buy now
                             <span><i class = "fas fa-shopping-cart"></i></span>
                         </button>
@@ -67,9 +71,10 @@
                 </div>
             </div>
         </div>
+    </div>
             <!-- end of single product -->
         {% endfor %}   
-        </div>
+      
     </div>
 </div>
 {% endblock %}
