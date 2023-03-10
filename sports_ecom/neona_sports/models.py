@@ -14,12 +14,13 @@ class Product(models.Model):
     Availibilty = models.CharField(choices=Availibilty,null=True, max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    
+    def img_preview(self): #new
+        return mark_safe('<img src = "{}" width = "300"/>'.format(url = self.image.url ))
 
+    
 
     def __str__(self):
         return self.name
 
-    def img_preview(self): #new
-        return mark_safe(f'<img src = "{url}" width = "300"/>'.format(
-             url = self.image.url ))
 

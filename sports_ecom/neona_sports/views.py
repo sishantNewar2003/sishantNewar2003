@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Product
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
+from django.contrib import messages
 
 
 
@@ -25,7 +26,9 @@ def loginpage(request):
         user=authenticate(request, username=user_name, password=pass1)
         if user is not None:
             login(request,user)
+            messages.success(request, "you have logged in successfully")
             return redirect('home')
+            
         else:
             return HttpResponse("Your Username or Password is incorrect")  
            
@@ -63,7 +66,6 @@ def  product(request):
     data = {
         'product': product
     }
-
 
     return render(request, 'product.html', data)
 
