@@ -10,6 +10,8 @@ urlpatterns = [
     path('logoutpage/', views.logoutpage, name="logoutpage"),
     path('product/', views.product, name="product"),
     path('product/<str:id>', views.product_detail, name="product_detail"),
+    
+    
 
 
   

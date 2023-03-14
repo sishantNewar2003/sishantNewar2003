@@ -67,6 +67,10 @@ img{
     margin: 0 auto;
     padding: 0 16px;
 }
+
+.small-container{
+    display: grid;
+}
 .lg-title,
 .md-title,
 .sm-title{

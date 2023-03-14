@@ -1,225 +1,355 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+
     <title>Homepage</title>
 
 </head>
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/cart.css'%}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
+    <!-- header -->
+    <header id="header">
+        <img src="{% static 'images/logo1.png'%}">
 
- 
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+        <div>
+            <ul id="navbar">
+                <li><a href="">Home</a></li>
+                <li><a href="{% url 'product' %}">Products</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="loginpage">Account</a></li>
+                <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+                <li><a href="cart/cart-detail"><i class="fa fa-shopping-cart" style="font-size:24px"></i><span
+                            class="badge bg-secondary">{{request.session.cart|length}}</span></a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    <!-- hero section -->
+    <section id="hero">
+        <h2>FEEL THE PRODUCT</h2>
+        <h4>Get Some Awesome Offers</h4>
+        <h1>On all products</h1>
+        <p>Save more with coupons of up to 70% off!</p>
+        <button>Shop Now</button>
+    </section>
 
 
-
-    <div class="header">
-        <div class="container">
-            <div class="navbar">
-                <img src="{% static 'images/logo1.png'%}" width="80px">
-
-
-                <nav>
-                    <ul>
-                        <li><a href="">Home</a></li>
-                        <li><a href="product">Products</a></li>
-                        <li><a href="product_detail">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="loginpage">Account</a></li>
-                        <li><a href="{% url 'logoutpage' %}">Logout</a></li>
-                        <li><a href="cart/cart-detail"><i class="fa fa-shopping-cart" style="font-size:24px"></i><span
-                                    class="badge bg-secondary">{{request.session.cart|length}}</span></a></li>
-                    </ul>
-
-                </nav>
-
-            </div>
-
-            <section class="banner">
-                <div class="row">
-                    <div class="col-2">
-                        <h1>Feel The Product!</h1>
-                        <p>Sports and games keep us healthy and fit <br> Sports are useful means of
-                            entertainment<br>physical activity, energy and strength</p>
-                        <a href="" class="btn">Explore now &#8594</a>
+    <!-- START: products section-->
+    <!-- p1 -->
+    <section id="product1">
+        <h2>Featured Products
+            <p>Some great pairs for this summer</p>
+        </h2>
+        <div class="product-container">
+            <!--  -->
+            <div class="product">
+                <img src="{% static 'images/shoe1.jpg'%}">
+                <!-- product description -->
+                <div class="description">
+                    <span>adidas</span>
+                    <h5>Addidas Shoes</h5>
+                    <!-- review stars -->
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-
-
+                    <h4>$74</h4>
                 </div>
-            </section>
+                <!-- description ends -->
+                <span class="cart"><a href="#"><i class="fa fa-shopping-cart"></i></a></span>
+            </div>
+            <!-- p2 -->
+            <div class="product">
+                <img src="{% static 'images/shoe1.jpg'%}">
+                <!-- product description -->
+                <div class="description">
+                    <span>adidas</span>
+                    <h5>Addidas Shoes</h5>
+                    <!-- review stars -->
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>$74</h4>
+                </div>
+                <!-- description ends -->
+                <span class="cart"><a href="#"><i class="fa fa-shopping-cart"></i></a></span>
+            </div>
+            <!-- p3 -->
+            <div class="product">
+                <img src="{% static 'images/shoe1.jpg'%}">
+                <!-- product description -->
+                <div class="description">
+                    <span>adidas</span>
+                    <h5>Addidas Shoes</h5>
+                    <!-- review stars -->
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>$74</h4>
+                </div>
+                <!-- description ends -->
+                <span class="cart"><a href="#"><i class="fa fa-shopping-cart"></i></a></span>
+            </div>
+            <!-- p4 -->
+            <div class="product">
+                <img src="{% static 'images/shoe1.jpg'%}">
+                <!-- product description -->
+                <div class="description">
+                    <span>adidas</span>
+                    <h5>Addidas Shoes</h5>
+                    <!-- review stars -->
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>$74</h4>
+                </div>
+                <!-- description ends -->
+                <span class="cart"><a href="#"><i class="fa fa-shopping-cart"></i></a></span>
+
+
+            </div>
+    </section>
+    <!-- END -->
+
+    <!-- START:banner -->
+    <section id="banner" class="section-m1">
+        <h4>Repair Services</h4>
+        <h2>Up to <span>70% off</span> - All T-shirts & Accessories
+        </h2>
+        <button class="normal">Explore More</button>
+    </section>
+    <!-- END -->
+
+    <!-- START: new arrivals section-->
+    <!-- p2 -->
+    <section id="product1">
+        <h2>New Arrivals
+            <p>Summer Collection New Modern Design</p>
+        </h2>
+        <div class="product-container">
+            <!-- p1 -->
+            <div class="product">
+                <img src="img/products/n1.jpg" alt="">
+                <!-- product description -->
+                <div class="description">
+                    <span>adidas</span>
+                    <h5>Addidas Shoes</h5>
+                    <!-- review stars -->
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>$74</h4>
+                </div>
+                <!-- description ends -->
+                <span class="cart"><a href="#"><i class="fa fa-shopping-cart"></i></a></span>
+            </div>
+            <!-- p2 -->
+            <div class="product">
+                <img src="img/products/n2.jpg" alt="">
+                <!-- product description -->
+                <div class="description">
+                    <span>adidas</span>
+                    <h5>Addidas Shoes</h5>
+                    <!-- review stars -->
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>$74</h4>
+                </div>
+                <!-- description ends -->
+                <span class="cart"><a href="#"><i class="fa fa-shopping-cart"></i></a></span>
+            </div>
+            <!-- p3 -->
+            <div class="product">
+                <img src="img/products/n3.jpg" alt="">
+                <!-- product description -->
+                <div class="description">
+                    <span>adidas</span>
+                    <h5>Addidas Shoes</h5>
+                    <!-- review stars -->
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>$74</h4>
+                </div>
+                <!-- description ends -->
+                <span class="cart"><a href="#"><i class="fa fa-shopping-cart"></i></a></span>
+            </div>
+            <!-- p4 -->
+            <div class="product">
+                <img src="img/products/n4.jpg" alt="">
+                <!-- product description -->
+                <div class="description">
+                    <span>adidas</span>
+                    <h5>Addidas Shoes</h5>
+                    <!-- review stars -->
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>$74</h4>
+                </div>
+                <!-- description ends -->
+                <span class="cart"><a href="#"><i class="fa fa-shopping-cart"></i></a></span>
+            </div>
 
 
         </div>
-    </div>
+    </section>
+    <!-- END -->
 
+    <!-- START: BANNER 2 -->
+    <section id="sm-banner" class="section-p1">
+        <div class="banner-box overlay">
+            <h4>crazy deals</h4>
+            <h2>buy 1 get 1 free</h2>
+            <span>The best classic dress is on sale at kandy</span>
+            <button class="white">Learn More</button>
+        </div>
+        <div class="banner-box banner-box2 overlay">
+            <h4>spring/summer</h4>
+            <h2>upcoming season</h2>
+            <span>The best classic dress is on sale at kandy</span>
+            <button class="white">Collection</button>
+        </div>
+    </section>
+    <!-- END -->
 
+    <!--  -->
+    <section id="banner3">
+        <div class="banner-box">
+            <h2>SEASONAL SALE</h2>
+            <h3>Winter Collection - 50% OFF</h3>
+        </div>
+        <div class="banner-box banner-box2">
+            <h2>NEW JACKET COLLECTION</h2>
+            <h3>Winter Collection - 50% OFF</h3>
+        </div>
+        <div class="banner-box banner-box3">
+            <h2>TRENDY WEARS</h2>
+            <h3>Winter Collection - 50% OFF</h3>
+        </div>
+    </section>
+    <!-- END -->
 
+    <!-- START: newsletter -->
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Sign Up For Newsletters</h4>
+            <p>Get E-mail updates about our latest shop and special offers</p>
+        </div>
+        <div class="form">
+            <input type="text" placeholder="Your email address">
+            <button class="normal">Sign Up</button>
+        </div>
+    </section>
+    <!-- END -->
 
-    <!-- featured categories -->
-
-    <div class="categories">
-        <div class="small-container">
+    <!-- START: footer -->
+    <footer class="section-p1">
+        <!-- contact -->
+        <div class="col">
+            <img class="logo" src="img/logo122.png" alt="">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong>147 Lekki Phase 1, Lagos, Nigeria</p>
+            <p><strong>Phone: </strong>+234 9011711481</p>
+            <p><strong>Hours: </strong> 8:00am - 7.00pm, Mon - Sat</p>
+            <!-- social icons -->
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                </div>
+            </div>
+        </div>
+        <!-- about info -->
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Infomation</a>
+            <a href="#">privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <!-- account info -->
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+        <!-- install -->
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play Store</p>
             <div class="row">
-                <div class="col-3">
-                    <img src="{% static 'images/image.jpg'%}">
-                </div>
-                <div class="col-3">
-                    <img src="{% static 'images/image1.jpg'%}">
-                </div>
-                <div class="col-3">
-                    <img src="{% static 'images/image2.jpg'%}">
-                </div>
+                <img src="img/pay/app.jpg" alt="">
+                <img src="img/pay/play.jpg" alt="">
             </div>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay/pay.png" alt="">
         </div>
-    </div>
 
-    <!-- featured products -->
-
-    <div class="small-container">
-        <h2 class="title">Featured Products</h2>
-        <div class="row">
-            <div class="col-4">
-                <img src="{% static 'images/shoe1.jpg'%}">
-                <h4>shoes</h4></a>
-
-                <p>Rs 100.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static 'images/shoe1.jpg'%}">
-                <h4>shoes</h4>
-
-                <p>Rs 150.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static 'images/shoe1.jpg'%}">
-                <h4>shoes</h4>
-
-                <p>Rs 80.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static 'images/shoe1.jpg'%}">
-                <h4>tshirts</h4>
-
-                <p>Rs 50.00</p>
-            </div>
+        <div class="copyright">
+            <p>Dummy Ecommerce Homepage &copy 2022 zeusscript Inc.</p>
         </div>
-        <h2 class="title">Latest Products</h2>
-        <div class="row">
-            <div class="col-4">
-                <img src="{% static 'images/shoe1.jpg'%}">
-                <h4>balls</h4>
-
-                <p>Rs 250.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static 'images/shoe1.jpg'%}">
-                <h4>shoes</h4>
-
-                <p>Rs 300.00</p>
-            </div>
-            <div class="col-4">
-                <img src="{% static 'images/shoe1.jpg'%}">
-                <h4>Racket</h4>
-
-
-            </div>
-            <div class="col-4">
-                <img src="{% static 'images/shoe1.jpg'%}">
-                <h4>Basketball</h4>
-
-                <p>Rs 2000.00</p>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <img src="{% static 'images/shoe1.jpg'%}">
-                    <h4>jna</h4>
-
-
-                </div>
-                <div class="col-4">
-                    <img src="{% static 'images/shoe1.jpg'%}">
-                    <h4>shjdbc</h4>
-
-
-                </div>
-                <div class="col-4">
-                    <img src="{% static 'images/shoe1.jpg'%}">
-                    <h4>jksdncj</h4>
-
-
-                </div>
-                <div class="col-4">
-                    <img src="{% static 'images/shoe1.jpg'%}">
-                    <h4>jksdnjc</h4>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-
-
-    <!-- footer -->
-
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col-1">
-                    <h3>Shop Here</h3>
-                    <ul>
-                        <li>Sports Items</li>
-                        <li>Sports T-shirts</li>
-                        <li>Basketballs</li>
-
-                    </ul>
-                </div>
-                <div class="footer-col-2">
-                    <h3> Our Motto</h3>
-
-                    <p>Our purpose is to assist you to meet your need for day-to-day or special ocassion.</p>
-                </div>
-                <div class="footer-col-3">
-                    <h3>Useful Links</h3>
-                    <ul>
-                        <li>Faqs</li>
-                        <li>Blog Post</li>
-                        <li>About Us</li>
-                        <li>Contact Us</li>
-                    </ul>
-                </div>
-                <div class="footer-col-4">
-                    <h3>Follow Us</h3>
-                    <ul>
-                        <li>Facebook</li>
-                        <li>Twitter</li>
-                        <li>Instagram</li>
-                        <li>YouTube</li>
-                    </ul>
-                </div>
-            </div>
-            <hr>
-            <p class="copyright">Copyright 2023</p>
-        </div>
-    </div>
-
-    <script>
-        setTimeout(function () {
-            if ($('#msg').length > 0) {
-                $('#msg').remove();
-            }
-        }, 2000)
-    </script>
-
+    </footer>
+    <!-- END -->
+    <!-- javascript file link -->
+    <script src="{% static 'app.js' %}"></script>
 
 </body>
 

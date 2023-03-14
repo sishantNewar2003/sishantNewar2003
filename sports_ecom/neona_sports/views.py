@@ -30,7 +30,8 @@ def loginpage(request):
             return redirect('home')
             
         else:
-            return HttpResponse("Your Username or Password is incorrect")  
+            messages.error(request, "Your Username or Password is incorrect")
+          
            
 
     return render(request,'login.html')
@@ -43,10 +44,12 @@ def signup(request):
         pass1=request.POST.get('password1')
         pass2=request.POST.get('password2')
         if pass1!=pass2:
-            return HttpResponse("Your password didn't match")  
+            messages.error(request, "Your Password didn't match") 
+            return redirect('signup')
         else:
            my_user=User.objects.create_user(uname,email,pass1)
            my_user.save()
+           messages.success(request, "Your account has been created")
            return redirect('loginpage')
 
         
@@ -76,8 +79,6 @@ def product_detail(request,id):
     }
     return render(request, 'product_detail.html', context)    
     
-
- 
 
 
 
