@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/profile.css'%}">
+
+<!-- Navbar -->
+<div class="nav">
+    <div class="container">
+      <h1>MY PROFILE</h1>
+    </div>
+  </div>
+  
+  <!-- Content -->
+  <div class="content">
+  
+    <!-- Profile Section -->
+    <div class="profile-section">
+      <div class="container">
+        <img src="{% static 'images/profile.jpg'%}" class="profile-photo">
+        <p class="profile-name">Username : {{user.username}}</p>
+        <p class="profile-name">E-Mail : {{user.email}} </p>
+        <button class="button profile-follow">Follow</button>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

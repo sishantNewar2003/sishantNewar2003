@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <style src="{% static 'grid.js' %}"></style>
+
+    <title>Homepage</title>
+
+</head>
+
+<body>
+    <!-- header -->
+    <header id="header">
+        <img src="{% static 'images/logo1.png'%}">
+
+        <div>
+            <ul id="navbar">
+                <div class="dropdown">
+                    <li><a class="dropbtn">Category</a>
+                        <i class="fa fa-caret-down"></i>
+                    </li>
+                    <div class="dropdown-content">
+                        
+                        <div class="row">
+
+                            {% for i in main_category %}
+                            <div class="column">
+                                <h3>{{i.name}}</h3>
+                                {% for cat in i.category_set.all %}
+                                <a href="/product/?categories={{cat.id}}">{{cat.id}}{{cat.name}}</a>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        
+
+                    </div>
+                </div>
+
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'product' %}">Products</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'loginpage' %}">Account</a></li>
+                <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+                <li><a href="{% url 'profile' %}"><i class='fas fa-user-alt'></i>{{user.username}}</a></li>
+            </ul>
+        </div>
+
+    </header>
+
+    {% block content %}
+
+
+    {% endblock %}
+
+
+
+    <!-- START: footer -->
+    <footer class="section-p1">
+        <!-- contact -->
+        <div class="col">
+            <img class="logo" src="img/logo122.png" alt="">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong>147 Lekki Phase 1, Lagos, Nigeria</p>
+            <p><strong>Phone: </strong>+234 9011711481</p>
+            <p><strong>Hours: </strong> 8:00am - 7.00pm, Mon - Sat</p>
+            <!-- social icons -->
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                </div>
+            </div>
+        </div>
+        <!-- about info -->
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Infomation</a>
+            <a href="#">privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <!-- account info -->
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+        <!-- install -->
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play Store</p>
+            <div class="row">
+                <img src="img/pay/app.jpg" alt="">
+                <img src="img/pay/play.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>Neona Sport, Samakhusi, Kathmandu
+        </div>
+    </footer>
+    <!-- END -->
+
+</body>
+
+</html>

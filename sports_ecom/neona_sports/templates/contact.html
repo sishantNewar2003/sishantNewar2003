@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/contact.css'%}">
+
+<section>
+    <div class="rt-container">
+        <div class="col-rt-12">
+            <div class="Scriptcontent">
+
+                <div>
+                    <div class="container">
+                        <div class="contact-parent">
+                            <div class="contact-child child1">
+                                <p>
+                                    <i class="fas fa-map-marker-alt"></i> Address <br />
+                                    <span> samakhusi,
+                                        <br />
+                                        Kathmandu.
+                                    </span>
+                                </p>
+
+                                <p>
+                                    <i class="fas fa-phone-alt"></i> For further details <br />
+                                    <span> 9807625453</span>
+                                </p>
+
+                                <p>
+                                    <i class=" far fa-envelope"></i> General Support <br />
+                                    <span>neonasports@gmail.com</span>
+                                </p>
+                            </div>
+
+                            <div class="contact-child child2">
+                                <div class="inside-contact">
+                                    <h2>Contact Us</h2>
+                                    <h3>
+                                        <span id="confirm">
+                                    </h3>
+                                    <form class="contact-form-style" action="/contact/" method="POST">
+                                        {% csrf_token %}
+                                        <p>Name *</p>
+                                        <input name="name" id="txt_name" type="text" Required="required">
+
+                                        <p>Email *</p>
+                                        <input name="email" id="txt_email" type="text" Required="required">
+
+                                        <p>Phone *</p>
+                                        <input name="phone" id="txt_phone" type="text" Required="required">
+
+                                        <p>Subject *</p>
+                                        <input name="subject" id="txt_subject" type="text" Required="required">
+
+                                        <p>Message *</p>
+                                        <textarea name="message" id="txt_message" rows="4" cols="20" Required="required"></textarea>
+
+                                        <input type="submit" id="btn_send" value="SEND">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

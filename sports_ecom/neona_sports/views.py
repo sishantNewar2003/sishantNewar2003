@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Product
+from .models import Product, Contact_us, Main_category, Category
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
 from django.contrib import messages
@@ -12,6 +12,10 @@ from django.contrib import messages
 
 # Create your views here.
 @login_required(login_url='login')
+ 
+def base(request):
+    return render(request, 'base.html')
+
 
 def hi(request):
     return render(request,'home.html')
@@ -64,10 +68,24 @@ def logoutpage(request):
 
 
 def  product(request):
+
+    main_category = Main_category.objects.all().order_by('-id')
     product = Product.objects.filter()
-    
+    category = Category.objects.all().order_by('-id')
+
+
+    categoriesID = request.GET.get('categories')
+
+    if categoriesID:
+        product = Product.objects.filter(category = categoriesID)
+    else:
+        product = Product.objects.filter()
+   
     data = {
-        'product': product
+        'main_category' : main_category,
+        'product': product,
+        'category': category,
+    
     }
 
     return render(request, 'product.html', data)
@@ -82,12 +100,50 @@ def product_detail(request,id):
 
 
 
+def Contact(request):
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        # phone_number = request.POST.get('phone_number')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        
+        
+
+        contact = Contact_us(
+            name=name,
+            email=email,
+            # phone_number=phone_number,
+            subject=subject,
+            message=message,
+
+        )
+
+        contact.save()
+        return redirect('home')
+
+
+    return render(request, "contact.html")
+
+
+
+def profile(request):
+    # check if the user is authenticated or not
+    if request.user.is_authenticated:
+        return render(request, 'profile.html')
+    else:
+        return redirect("loginpage")
+
+
+
+
 @login_required(login_url="/users/login")
 def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.add(product=product)
-    return redirect("product")
+    return redirect("cart_detail")
 
 
 @login_required(login_url="/users/login")

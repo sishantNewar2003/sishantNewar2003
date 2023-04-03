@@ -1,134 +1,62 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Products</title>
-    
-</head>
+{% extends 'base.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/new.css'%}"> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-<body>
-   
-
-<div class="header">
-<div class="container">
-    <div class="navbar">
-        <img src="{% static 'images/logo1.png'%}">    
-            
-       
-        <nav>
-<ul>
-    <li><a href="{% url 'home' %}">Home</a></li>
-    <li><a href="">Products</a></li>
-    <li><a href="">About</a></li>
-    <li><a href=""></a>Contact</a></li>
-    <li><a href="{% url 'logoutpage' %}">Logout</a></li>
-    
-    
-
-</ul>
-        </nav>
-     </div>
-     
-     </div>
-
-</div>
-
 {% block content %}
 
-<div class = "products">
-    <div class = "container">
+<link rel="stylesheet" href="{% static 'css/pro.css'%}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <h1 class = "lg-title">Our Products</h1>
-        <p class = "text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quos sit consectetur, ipsa voluptatem vitae necessitatibus dicta veniam, optio, possimus assumenda laudantium. Temporibus, quis cum.</p>
-        {% for prod in product %}
+<div class="main-wrapper">
+    <div class="container">
+        <div class="main-title">
+            <h1>Our Products</h1>
+            <p class="text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quos sit
+                consectetur, ipsa voluptatem vitae necessitatibus dicta veniam, optio, possimus assumenda laudantium.
+                Temporibus, quis cum.</p>
+        </div>
+        <div class="display-style-btns">
+            <button type="button" id="grid-active-btn">
+                <i class="fas fa-th"></i>
+            </button>
+            <button type="button" id="details-active-btn">
+                <i class="fas fa-list-ul"></i>
+            </button>
+        </div>
 
-        
-        <div class = "product-items">
-   
-            <!-- single product -->
-        <div class="small-container">
-            <div class = "product">
-                <div class = "product-content">
-                    <div class = "product-img">
-                        <img src="{{prod.image.url}}" alt = "product image">
-                       
-                    </div>
-                    <div class = "product-btns">
-                        <a href="{% url 'cart_add' prod.id %}" type = "submit-button" class = "btn-cart"> add to cart
-                            <span><i class = "glyphicon glyphicon-plus"></i></span>
+
+        <div class="item-list">
+
+            {% for prod in product %}
+            <div class="item">
+                <div class="item-img">
+                    <img src="{{prod.image.url}}" alt="product image">
+                    <div class="icon-list">
+                        <a href="{% url 'cart_add' prod.id %}" type="button">
+                            <i class="fas fa-shopping-cart"></i>
                         </a>
-                        <button type = "button" class = "btn-buy"> buy now
-                            <span><i class = "fas fa-shopping-cart"></i></span>
-                        </button>
+                        <a type="button">
+                            <i class="far fa-heart"></i>
+                        </a>
                     </div>
                 </div>
-                
-                    <a href = "{{prod.id}}" class = "product-name">{{prod.name}}</a>
-                    <p class = "product-price">{{prod.sale}}</p>
-                    <p class = "product-price">{{prod.price}}</p>
+                <div class="item-detail">
+                    <a href="{{prod.id}}" class="item-name">{{prod.name}}</a>
+                    <div class="item-price">
+                        <span class="new-price">{{prod.price}}</span>
+                        <span class="old-price">{{prod.sale}}</span>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugiat quod corporis delectus
+                        sequi laudantium molestias vero distinctio, qui numquam dolore, corrupti, enim consectetur cum?
+                    </p>
+                    <a href="{% url 'cart_add' prod.id %}" type="button" class="add-btn">add to cart</a>
                 </div>
             </div>
+            {% endfor %}
         </div>
-    </div>
-            <!-- end of single product -->
-        {% endfor %}   
-      
+
     </div>
 </div>
+
+<script src="{% static 'js/grid.js' %}"></script>>
+
+
 {% endblock %}
-
-
-
-<!-- footer -->
-   
-<div class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="footer-col-1">
-                <h3>Shop Here</h3>
-                <ul>
-                    <li>Shoes</li>
-                    <li>T-Shirts</li>
-                    <li>and many more</li>
-                    
-                </ul>
-            </div>
-            <div class="footer-col-2">
-                <h3> Our Motto</h3>
-              
-                <p>Our purpose is to assist you to meet your need for day-to-day in sports.</p>
-            </div>
-            <div class="footer-col-3">
-                <h3>Useful Links</h3>
-                <ul>
-                    <li>Faqs</li>
-                    <li>Blog Post</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
-                </ul>
-            </div>
-            <div class="footer-col-4">
-                <h3>Follow Us</h3>
-                <ul>
-                    <li>Facebook</li>
-                    <li>Twitter</li>
-                    <li>Instagram</li>
-                    <li>YouTube</li>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <p class="copyright">Copyright 2023</p>
-    </div>
-</div>   
-
-
-
-
-
-</body>
-</html>
-
