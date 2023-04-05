@@ -73,7 +73,6 @@ def  product(request):
     product = Product.objects.filter()
     category = Category.objects.all().order_by('-id')
 
-
     categoriesID = request.GET.get('categories')
 
     if categoriesID:
@@ -143,6 +142,7 @@ def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.add(product=product)
+
     return redirect("cart_detail")
 
 
@@ -180,3 +180,4 @@ def cart_clear(request):
 @login_required(login_url="/users/login")
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
+
