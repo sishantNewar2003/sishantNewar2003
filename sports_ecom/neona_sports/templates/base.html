@@ -56,10 +56,10 @@
                     </div>
                 </div>
 
-                <li><a href="">About</a></li>
+                
                 <li><a href="{% url 'contact' %}">Contact</a></li>
                 <li><a href="{% url 'loginpage' %}">Account</a></li>
-                <li></li>
+                <li><a href="">About</a></li>
 
                 <div class="dropbutton">
                     <li><a class="dropbtns"><i class='fas fa-user-alt'></i>{{user.username}}</a></li>
@@ -89,8 +89,8 @@
         <div class="col">
             <img class="logo" src="img/logo122.png" alt="">
             <h4>Contact</h4>
-            <p><strong>Address: </strong>147 Lekki Phase 1, Lagos, Nigeria</p>
-            <p><strong>Phone: </strong>+234 9011711481</p>
+            <p><strong>Address: </strong>samakhusi, Kathmandu</p>
+            <p><strong>Phone: </strong>98766353</p>
             <p><strong>Hours: </strong> 8:00am - 7.00pm, Mon - Sat</p>
             <!-- social icons -->
             <div class="follow">
@@ -111,15 +111,14 @@
             <a href="#">Delivery Infomation</a>
             <a href="#">privacy Policy</a>
             <a href="#">Terms & Conditions</a>
-            <a href="#">Contact Us</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
         </div>
         <!-- account info -->
         <div class="col">
             <h4>My Account</h4>
             <a href="#">Sign In</a>
-            <a href="#">View Cart</a>
+            <a href="/cart/cart-detail">View Cart</a>
             <a href="#">My Wishlist</a>
-            <a href="#">Track My Order</a>
             <a href="#">Help</a>
         </div>
         <!-- install -->

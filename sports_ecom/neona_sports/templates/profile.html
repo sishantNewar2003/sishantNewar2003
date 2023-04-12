@@ -20,6 +20,7 @@
         <img src="{% static 'images/profile.jpg'%}" class="profile-photo">
         <p class="profile-name">Username : {{user.username}}</p>
         <p class="profile-name">E-Mail : {{user.email}} </p>
+        <a href="{% url 'changepass' %}" class="profile-follow" > Change Password</a>
         
       </div>
     </div>

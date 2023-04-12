@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup Page</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css'%}"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    {% include 'messages.html'%}
+
+</head>
+<body style="background-image: url('{% static 'images/4.jpg' %}');">
+    
+    
+   <img src="{% static 'images/logo1.png'%}" width="90px">
+
+   <div class="loginbox">
+    <img src="{% static 'images/logo.png'%}" class="avatar">
+    
+    <h1>Create your Admin Account</h1>
+<form action="" method="post">
+    {% csrf_token %}
+
+    <p>Username</p>
+    <input type="text" name="username" placeholder="Enter Username">
+    <p>E-Mail</p>
+    <input type="email" name="email" placeholder="Enter Username">
+    <p>Password</p>
+    <input type="password" name="password1" placeholder="Enter Password">
+    <p>Confirm Password</p>
+    <input type="password" name="password2" placeholder="Enter Password Again">
+
+    <input type="submit" name="" value="Sign Up">
+    <a href="{% url 'loginpage' %}"> Already have an account</a>
+     
+</form>
+
+   </div>
+
+    
+
+<h1> </h1>
+</div>
+
+</body>
+</html>

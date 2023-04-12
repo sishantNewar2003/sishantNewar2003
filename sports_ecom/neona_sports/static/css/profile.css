@@ -64,17 +64,12 @@ body {
     font-size: 18px;
 }
 
-.profile-detail {
-    color: #fff;
-    font-size: 14px;
-    line-height: 25px;
-}
-
 .profile-follow {
     background-color: #39b85d;
     color: white;
     transition: all 0.3s;
     font-size: 15px;
+    border-radius: 10px;
 }
 
 .profile-follow:hover {

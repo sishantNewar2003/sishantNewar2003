@@ -46,7 +46,7 @@
                 <li><a href="">Home</a></li>
                 <li><a href="{% url 'product' %}">Products</a></li>
 
-                <li><a href="">About</a></li>
+                <li><a href="{% url 'dashboard' %}">About</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
                 <li><a href="{% url 'loginpage' %}">Account</a></li>
                 <li><a href="/cart/cart-detail"><i class="fa fa-shopping-cart" style="font-size:24px"></i><span
@@ -480,8 +480,8 @@
         <div class="col">
             <img class="logo" src="img/logo122.png" alt="">
             <h4>Contact</h4>
-            <p><strong>Address: </strong>147 Lekki Phase 1, Lagos, Nigeria</p>
-            <p><strong>Phone: </strong>+234 9011711481</p>
+            <p><strong>Address: </strong>samakhusi, Kathmandu</p>
+            <p><strong>Phone: </strong>9811711481</p>
             <p><strong>Hours: </strong> 8:00am - 7.00pm, Mon - Sat</p>
             <!-- social icons -->
             <div class="follow">
@@ -508,7 +508,7 @@
         <div class="col">
             <h4>My Account</h4>
             <a href="#">Sign In</a>
-            <a href="#">View Cart</a>
+            <a href="/cart/cart-detail">View Cart</a>
             <a href="#">My Wishlist</a>
             <a href="#">Track My Order</a>
             <a href="#">Help</a>
@@ -526,12 +526,19 @@
         </div>
 
         <div class="copyright">
-            <p>Dummy Ecommerce Homepage &copy 2022 zeusscript Inc.</p>
+            <p>Neona Sports, Samakhusi, Kathmandu.</p>
         </div>
     </footer>
-    <!-- END -->
-    <!-- javascript file link -->
-    <script src="app.js "></script>
+    
+
+    <script>
+        setTimeout(function()
+        {
+            if($('#msg').length > 0){
+                $('#msg').remove();
+            }
+        }, 2000)
+    </script>
 
 </body>
 

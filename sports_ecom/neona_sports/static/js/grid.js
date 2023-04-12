@@ -16,4 +16,3 @@ detailsViewBtn.addEventListener('click', () => {
     itemList.classList.add("details-active");
 });
 
-console.log("hello")
