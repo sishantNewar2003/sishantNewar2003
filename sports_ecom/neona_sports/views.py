@@ -3,11 +3,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from .models import Product, Contact_us, Main_category, Category
-from django.contrib.auth.decorators import login_required
+from .models import Product, Contact_us, Main_category, Category, Order, Customer
 from cart.cart import Cart
 from django.contrib import messages
+from django.template import RequestContext
 from django.contrib.auth.forms import PasswordChangeForm
+import os
 
 
 
@@ -16,7 +17,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 def base(request):
     return render(request, 'base.html')
 
-
+@login_required(login_url="/loginpage/")
 def hi(request):
     return render(request,'home.html')
 
@@ -67,8 +68,8 @@ def logoutpage(request):
     return redirect('loginpage')
 
 
+@login_required(login_url="/loginpage/")
 def  product(request):
-
     main_category = Main_category.objects.all().order_by('-id')
     product = Product.objects.filter()
     category = Category.objects.all().order_by('-id')
@@ -78,7 +79,7 @@ def  product(request):
     if categoriesID:
         product = Product.objects.filter(category = categoriesID)
     else:
-        product = Product.objects.filter()
+        product = Product.objects.all()
    
     data = {
         'main_category' : main_category,
@@ -97,7 +98,7 @@ def product_detail(request,id):
     
 
 
-
+@login_required(login_url="/loginpage/")
 def Contact(request):
 
     if request.method == 'POST':
@@ -131,7 +132,8 @@ def profile(request):
     else:
         return redirect("loginpage")
 
-
+def Aboutus(request):
+    return render(request, 'aboutus.html')
 
 
 @login_required(login_url="/users/loginpage/")
@@ -139,7 +141,6 @@ def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.add(product=product)
-
     return redirect("cart_detail")
 
 
@@ -178,6 +179,8 @@ def cart_clear(request):
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
 
+
+
 def admin(request):
     contact = Contact_us.objects.filter()
 
@@ -195,14 +198,14 @@ def ADD(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
-        cont = Contact_us(
+        contact = Contact_us(
             name=name,
             email=email,
             subject=subject,
             message=message,
 
         )
-        cont.save()
+        contact.save()
 
         return redirect('admin')
     
@@ -250,7 +253,7 @@ def Delete(request, id):
         'contact':contact
     }
 
-    return redirect('admin')
+    return redirect('admin', context)
 
 def Changepass(request):
     if request.method == "POST":
@@ -276,15 +279,15 @@ def prodadmin(request):
 
 def adminlogin(request):
     if request.method=="POST":
-        user_name=request.POST.get('username')
-        pass1=request.POST.get('pass')
+        user_name1=request.POST.get('username')
+        pass2=request.POST.get('pass')
         
         
-        user=authenticate(request, username=user_name, password=pass1)
+        user=authenticate(request, username=user_name1, password=pass2)
         if user is not None:
             login(request,user)
             messages.success(request, "you have logged in successfully")
-            return ('dashboard')
+            return ('prodadmin')
             
         else:
             messages.error(request, "Your Username or Password is incorrect")
@@ -295,8 +298,23 @@ def adminlogin(request):
 
 
 def dashboard(request):
+    order=Order.objects.all()
+    customer=Customer.objects.all()
+    
+    total_customer=customer.count()
+    total_order=order.count()
+    
 
-    return render(request, 'admin/adimindashboard.html')
+    context={
+        'order':order,
+        'customer':customer,
+        'total_customer':total_customer,
+        'total_order':total_order,
+        
+    }
+
+    return render(request, 'admin/adimindashboard.html', context)
+
 
 def adminsignup(request):
      
@@ -307,7 +325,7 @@ def adminsignup(request):
         pass2=request.POST.get('password2')
         if pass1!=pass2:
             messages.error(request, "Your Password didn't match") 
-            return redirect('signup')
+            return redirect('adminsignup')
         else:
            my_user=User.objects.create_user(uname,email,pass1)
            my_user.save()
@@ -317,5 +335,53 @@ def adminsignup(request):
    
     return render(request, 'admin/adminsignup.html')
 
-def wishlist(request):
-    return render(request, 'wishlist.html')
+def addProduct(request):
+    if request.method == "POST":
+        prod = Product()
+        prod.name = request.POST.get('name')
+        prod.price = request.POST.get('price')
+        prod.categories = request.POST.get('categories')
+
+        if len(request.FILES) != 0:
+            prod.image = request.FILES['image']
+
+        prod.save()
+        messages.success(request,"Product succesfully added")
+        return redirect('prodadmin')    
+
+    return render(request, 'admin/addproduct.html')
+
+
+def editProduct(request, st):
+    prod = Product.objects.get(id=st)
+
+    if request.method == "POST":
+        if len(request.FILES) !=0:
+            if len(prod.image) > 0:
+                os.remove(prod.image.path)
+            prod.image = request.FILES['image']
+        prod.name = request.POST.get('name')
+        prod.price = request.POST.get('price')
+        prod.categories = request.POST.get('categories')
+
+        prod.save()
+
+        messages.success(request, "Product Updated successfully")
+        return redirect('prodadmin')
+    
+    context ={
+        'prod':prod
+    }
+    return render(request, 'admin/editproduct.html', context)
+
+def deleteProduct(request, st):
+    prod = Product.objects.filter(id=st)
+    prod.delete()
+    messages.success(request,"product deleted sucessfully")
+    return redirect('prodadmin')
+
+def khalti(request):
+    context={
+
+    }
+    return render(request, 'khalti.html', context)

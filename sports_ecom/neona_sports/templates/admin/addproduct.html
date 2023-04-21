@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+	<link rel="stylesheet" href="{% static 'css/admin.css'%}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>add product</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container register-form">
+          <div class="form">
+            <div class="note">
+              <p>ADD PRODUCTS</p>
+            </div>
+            <div class="form-content">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input name="name" type="text" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>price</label>
+                    <input name="price" type="number" class="form-control" required>
+                  </div>
+      
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>category</label>
+                    <input name="category" type="text" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>image</label>
+                    <input name="image" type="file" class="form-control" required>
+                  </div>
+      
+      
+                </div>
+              </div>
+              <button type="submit" class="btnSubmit">ADD</button>
+            </div>
+          </div>
+        </div>
+      </form>
+</body>
+</html>

@@ -36,9 +36,10 @@
             </td>
             <td>
                
-                <input type="number" value="{{value.quantity}}">
-                
-                
+            <h2> <a class="cart_quantity_up" href="{% url 'item_increment' value.product_id %}">+</a>
+                <input value="{{value.quantity}}">
+                <a class="cart_quantinty_down" href="{% url 'item_decrement' value.product_id %}">-</a>
+            </h2>
             </td>
 
             <td>Rs. {{ value.price|multiply:value.quantity }}</td>
@@ -57,12 +58,27 @@
                 <td>Delivery charge</td>
                 <td>Rs.100</td>
             </tr>
+
+            <tr>
+                <td>Shipping</td>
+                <td>{{cart_total_amount  |multiply:10}}}</td>
+               
+            </tr>
+
             <tr>
                 <td>Total</td>
                 <td>Rs. {{ cart_total_amount| add:100 }} </td>
             </tr>
-        </table>
 
+            <tr>
+                <td>Payment</td>
+                <td><a  href="{% url 'khalti' %}" id="payment-button">Pay with Khalti</a></td>
+            </tr>
+              
+              
+           
+        </table>
+      
     </div>
 
 </div>

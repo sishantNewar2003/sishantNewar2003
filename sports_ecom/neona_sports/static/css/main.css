@@ -156,10 +156,11 @@ button.normal {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  width: 100%;
+  width: 60%;
   left: 0;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+
 }
 
 
@@ -172,9 +173,9 @@ button.normal {
 .column {
   float: left;
   width: 33.33%;
-  padding: 10px;
+  padding: 50px;
   background-color: #ccc;
-  height: 250px;
+  height: 200px;
   background: url("../images/trek3.jpg");
 }
 
@@ -182,7 +183,7 @@ button.normal {
 .column a {
   float: none;
   color: black;
-  padding: 16px;
+  padding: 7px;
   text-decoration: none;
   display: block;
   text-align: left;

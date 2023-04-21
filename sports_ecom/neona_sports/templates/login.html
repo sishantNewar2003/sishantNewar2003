@@ -11,6 +11,7 @@
 </head>
 
 <body style="background-image: url('{% static 'images/4.jpg' %}')">
+
     {% include 'messages.html' %}
 
 
@@ -29,7 +30,8 @@
             <input type="password" name="pass" placeholder="Enter Password">
             <input type="submit" name="" value="Login">
             <a href="{% url 'password_reset' %}"> Forget your password</a><br>
-            <a href="{% url 'signup' %}"> Don't have an Account?</a>
+            <a href="{% url 'signup' %}"> Don't have an Account?</a><br>
+            <a href="{% url 'adminlogin' %}"> Login as Admin</a>
 
 
 
@@ -42,7 +44,15 @@
 
 
     </div>
-    <script src="{% static 'js/grid.js' %}"></script>>
+    <script src="{% static 'js/grid.js' %}"></script>
+    <script>
+        setTimeout(function()
+        {
+            if($('#message').length > 0){
+                $('#message').remove();
+            }
+        }, 2000)
+    </script>
 </body>
 
 </html>

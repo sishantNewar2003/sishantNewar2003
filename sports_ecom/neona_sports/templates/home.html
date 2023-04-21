@@ -45,8 +45,7 @@
 
                 <li><a href="">Home</a></li>
                 <li><a href="{% url 'product' %}">Products</a></li>
-
-                <li><a href="{% url 'dashboard' %}">About</a></li>
+                <li><a href="{% url 'aboutus' %}">About</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
                 <li><a href="{% url 'loginpage' %}">Account</a></li>
                 <li><a href="/cart/cart-detail"><i class="fa fa-shopping-cart" style="font-size:24px"></i><span
@@ -495,34 +494,27 @@
                 </div>
             </div>
         </div>
-        <!-- about info -->
+       
         <div class="col">
             <h4>About</h4>
-            <a href="#">About Us</a>
-            <a href="#">Delivery Infomation</a>
-            <a href="#">privacy Policy</a>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Contact Us</a>
+            <a href="{% url 'aboutus' %}">About Us</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
         </div>
         <!-- account info -->
         <div class="col">
             <h4>My Account</h4>
-            <a href="#">Sign In</a>
+            <a href="{% url 'signup' %}">Sign In</a>
             <a href="/cart/cart-detail">View Cart</a>
             <a href="#">My Wishlist</a>
-            <a href="#">Track My Order</a>
-            <a href="#">Help</a>
+           
         </div>
         <!-- install -->
         <div class="col install">
             <h4>Install App</h4>
             <p>From App Store or Google Play Store</p>
-            <div class="row">
-                <img src="img/pay/app.jpg" alt="">
-                <img src="img/pay/play.jpg" alt="">
-            </div>
+           
             <p>Secured Payment Gateways</p>
-            <img src="img/pay/pay.png" alt="">
+           
         </div>
 
         <div class="copyright">
