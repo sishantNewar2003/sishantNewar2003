@@ -21,14 +21,15 @@
 
         <h1>Login as Admin</h1>
         <form method="POST">
-            {% csrf_token %}
+        {% csrf_token %}
+
             <p>Username</p>
             <input type="text" name="username" placeholder="Enter Username">
             <p>password</p>
             <input type="password" name="pass" placeholder="Enter Password">
             <input type="submit" name="" value="Login">
            
-            <a href="{% url 'signup' %}"> Don't have an Account?</a>
+           
 
 
 

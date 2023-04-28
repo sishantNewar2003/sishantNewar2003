@@ -57,7 +57,6 @@ urlpatterns = [
     
     #admin login
     path('adminlogin/', views.adminlogin, name="adminlogin"),
-    path('adminsignup/', views.adminsignup, name="adminsignup"),
     path('dashboard/', views.dashboard, name="dashboard"),
 
     # admin Products
@@ -66,7 +65,15 @@ urlpatterns = [
     path('edit-product/<str:st>', views.editProduct, name="edit-product"),
     path('delete-product/<str:st>', views.deleteProduct, name="delete-product"),
 
-    path('khalti/', views.khalti, name='khalti'),
+    #wishlist
+    path('wishlist/',views.Wishlist, name='wishlist'),
+
+    #khalti
+    path('khalti', views.khalti, name='khalti'),
+    path('khalti-verify/', views.khalti_verify, name='khaltiverify'),
+
+    #Checkout
+    path('checkout', views.Checkout, name='checkout'),
    
 ]
 

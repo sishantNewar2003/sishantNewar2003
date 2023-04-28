@@ -69,12 +69,11 @@
                 <td>Total</td>
                 <td>Rs. {{ cart_total_amount| add:100 }} </td>
             </tr>
-
-            <tr>
-                <td>Payment</td>
-                <td><a  href="{% url 'khalti' %}" id="payment-button">Pay with Khalti</a></td>
-            </tr>
+            
+       
               
+                <td><a href="{% url 'checkout' %}" id="payment-button">Checkout</a></td>
+            
               
            
         </table>

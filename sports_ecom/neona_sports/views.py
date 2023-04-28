@@ -1,25 +1,32 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from django.contrib.auth.decorators import login_required
-from .models import Product, Contact_us, Main_category, Category, Order, Customer
-from cart.cart import Cart
-from django.contrib import messages
-from django.template import RequestContext
-from django.contrib.auth.forms import PasswordChangeForm
 import os
 
+from cart.cart import Cart
+from django.contrib import messages
+from django.contrib.auth import (authenticate, login, logout,
+                                 update_session_auth_hash)
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
+from django.template import RequestContext
+import requests
 
+
+from .models import (Category, Contact_us, Customer, Main_category, Order,
+                     Product)
 
 # Create your views here.
 
 def base(request):
     return render(request, 'base.html')
 
-@login_required(login_url="/loginpage/")
+
 def hi(request):
-    return render(request,'home.html')
+    data = Product.objects.filter(featured=True).order_by('-id')
+
+    return render(request,'home.html', {'data':data})
 
 
 def loginpage(request):
@@ -32,6 +39,7 @@ def loginpage(request):
         if user is not None:
             login(request,user)
             messages.success(request, "you have logged in successfully")
+       
             return redirect('home')
             
         else:
@@ -44,15 +52,24 @@ def loginpage(request):
 
 def signup(request):
     if request.method=="POST":
-        uname=request.POST.get('username')
+        username=request.POST.get('username')
         email=request.POST.get('email')
         pass1=request.POST.get('password1')
         pass2=request.POST.get('password2')
+        
+        if User.objects.filter(username=username):
+            messages.error(request, "username already exist!!")
+            return redirect('signup')
+        
+        if User.objects.filter(email=email):
+            messages.error(request, "email already exist!")
+            return redirect('signup')        
+        
         if pass1!=pass2:
             messages.error(request, "Your Password didn't match") 
             return redirect('signup')
         else:
-           my_user=User.objects.create_user(uname,email,pass1)
+           my_user=User.objects.create_user(username,email,pass1)
            my_user.save()
            messages.success(request, "Your account has been created")
            return redirect('loginpage')
@@ -68,7 +85,7 @@ def logoutpage(request):
     return redirect('loginpage')
 
 
-@login_required(login_url="/loginpage/")
+
 def  product(request):
     main_category = Main_category.objects.all().order_by('-id')
     product = Product.objects.filter()
@@ -179,7 +196,30 @@ def cart_clear(request):
 def cart_detail(request):
     return render(request, 'cart/cart_detail.html')
 
+def Checkout(request):
+    if request.method == 'POST':
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        mobile = request.POST.get('mobile')
+        
+        
+        messages.success(request, "your order has been placed")
 
+        order = Order(
+            firstname=firstname,
+            lastname=lastname,
+            email=email,
+            address=address,
+            mobile=mobile,
+
+        )
+
+        order.save()
+        return redirect('khalti')
+    
+    return render(request, 'checkout.html')
 
 def admin(request):
     contact = Contact_us.objects.filter()
@@ -277,30 +317,10 @@ def prodadmin(request):
     }
     return render(request, 'admin/productadmin.html', data)
 
-def adminlogin(request):
-    if request.method=="POST":
-        user_name1=request.POST.get('username')
-        pass2=request.POST.get('pass')
-        
-        
-        user=authenticate(request, username=user_name1, password=pass2)
-        if user is not None:
-            login(request,user)
-            messages.success(request, "you have logged in successfully")
-            return ('prodadmin')
-            
-        else:
-            messages.error(request, "Your Username or Password is incorrect")
-          
-           
-
-    return render(request, 'admin/adminlogin.html')
-
 
 def dashboard(request):
     order=Order.objects.all()
     customer=Customer.objects.all()
-    
     total_customer=customer.count()
     total_order=order.count()
     
@@ -315,25 +335,26 @@ def dashboard(request):
 
     return render(request, 'admin/adimindashboard.html', context)
 
-
-def adminsignup(request):
-     
-    if request.method=="POST":
-        uname=request.POST.get('username')
-        email=request.POST.get('email')
-        pass1=request.POST.get('password1')
-        pass2=request.POST.get('password2')
-        if pass1!=pass2:
-            messages.error(request, "Your Password didn't match") 
-            return redirect('adminsignup')
-        else:
-           my_user=User.objects.create_user(uname,email,pass1)
-           my_user.save()
-           messages.success(request, "Your account has been created")
-           return redirect('adminlogin')
-
+def adminlogin(request):
    
-    return render(request, 'admin/adminsignup.html')
+     if request.method=="POST":
+        user_name=request.POST.get('username')
+        pass1=request.POST.get('pass')
+        
+        
+        user=authenticate(request, username=user_name, password=pass1)
+        if user is not None and user.is_staff:
+            login(request,user)
+            messages.success(request, "you have logged in successfully")
+            return redirect('dashboard')
+            
+        else:
+            messages.error(request, "Your Username or Password is incorrect")
+          
+     return render(request, 'admin/adminlogin.html')
+
+
+
 
 def addProduct(request):
     if request.method == "POST":
@@ -381,7 +402,48 @@ def deleteProduct(request, st):
     return redirect('prodadmin')
 
 def khalti(request):
-    context={
 
+   
+    context={
+    
     }
     return render(request, 'khalti.html', context)
+
+def khalti_verify(request):
+   token = request.GET.get("token")
+   amount = request.GET.get("amount") 
+   print(token, amount)
+    
+   url = "https://khalti.com/api/v2/payment/verify/"
+
+   payload = {
+        'token': token,
+        'amount': amount,
+    }
+
+   headers = {
+        'Authorization': 'Key test_secret_key_f73da06a8242411686e3e37a65103412'
+    }
+   
+   response = requests.request("POST", url, headers=headers, data=payload)
+   resp_dict = response.json()
+   if resp_dict.get("idx"):
+       success = True
+     
+
+   else:
+       success = False
+
+
+   data={
+      "success": success
+   }
+   return JsonResponse(data)
+
+def Wishlist(request,id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect('wishlist')
+
+

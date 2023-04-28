@@ -54,6 +54,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/')
     Availibilty = models.CharField(choices=Availibilty,null=True, max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+    featured = models.BooleanField(default=False)
    
 
     def __str__(self):
@@ -77,13 +78,29 @@ class Order(models.Model):
         ('Delivered','Delivered'),
 
     }
-    
-    customer=models.ForeignKey(Customer,null=True,on_delete=models.SET_NULL)
-    product=models.ForeignKey(Product, null=True,on_delete=models.SET_NULL)
-    date_created=models.DateTimeField(auto_now_add=True, null=True)
-    status=models.CharField(max_length=50, null=True, choices=STATUS)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    firstname = models.CharField(max_length=100,null=True)
+    lastname = models.CharField(max_length=100, null=True)
     email = models.CharField(max_length=50,null=True)
     address = models.CharField(max_length=500,null=True)
     mobile = models.CharField(max_length=20,null=True)
-    order_date= models.DateField(auto_now_add=True,null=True)
-    status=models.CharField(max_length=50,null=True,choices=STATUS)
+    amount = models.CharField(max_length=100, null=True)
+    payment_completed = models.BooleanField(default=False, null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+
+      
+    # def __str__(self):
+    #     return self.user
+
+
+class order_items(models.Model):
+    order=models.ForeignKey(Order, on_delete=models.CASCADE)
+    product=models.CharField(max_length=200)
+    image=models.ImageField(upload_to='products/')
+    quantity=models.CharField(max_length=20)
+    price=models.CharField(max_length=50)
+    total=models.CharField(max_length=1000)
+
+    # def __str__(self):
+    #     return self.user

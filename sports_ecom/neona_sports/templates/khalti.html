@@ -4,16 +4,16 @@
 </head>
 <body>
     ...
-    <!-- Place this where you need payment button -->
+    <a href="{% url 'home' %}">Go to homepage</a><br></br>
     <button id="payment-button">Pay with Khalti</button>
-    <!-- Place this where you need payment button -->
-    <!-- Paste this code anywhere in you body tag -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script>
         var config = {
             // replace the publicKey with yours
-            "publicKey": "test_secret_key_f73da06a8242411686e3e37a65103412",
+            "publicKey": "test_public_key_1937f7748dd047b793ccdf1ccb8b1e1a",
             "productIdentity": "1234567890",
-            "productName": "Dragon",
+            "productName": "product",
             "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
             "paymentPreference": [
                 "KHALTI",
@@ -25,7 +25,22 @@
             "eventHandler": {
                 onSuccess (payload) {
                     // hit merchant api for initiating verfication
-                    console.log(payload);
+                    axios.get("/khalti-verify/", {
+                        params:{
+                            'token': payload.token,
+                            'amount':payload.amount,
+
+                        }
+                    }).then(function(resp){
+                        if (resp.data.success == true){
+                        alert("Payment Completed Successfully")
+                        location.href = "/"
+                        }else{
+                            alert("Sorry. Error ocucured")
+                        location.href = "{{ request.build_absolute_url }}"
+                        }
+                    })
+              
                 },
                 onError (error) {
                     console.log(error);
@@ -43,7 +58,7 @@
             checkout.show({amount: 1000});
         }
     </script>
-    <!-- Paste this code anywhere in you body tag -->
+   
     ...
 </body>
 </html>

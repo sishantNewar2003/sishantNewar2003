@@ -63,6 +63,7 @@
           <th>Customer Name</th>
           <th>Customer Mobile</th>
           <th>Customer E-Mail</th>
+          <th>Customer Address</th>
           <th>Product Name</th>
           <th>Status</th>
 
@@ -72,14 +73,16 @@
       {% for order in order %}
       <tr>
 
-        <td> {{order.customer}}</td>
+        <td>{{order.firstname}}</td>
         <td>{{order.mobile}}</td>
         <td>{{order.email}}</td>
+        <td>{{order.address}}</td>
         <td>{{order.product}}</td>
         <td>{{order.status}}</td>
       
       </tr>
       {% endfor %}
+  
     </table>
 
 </div>

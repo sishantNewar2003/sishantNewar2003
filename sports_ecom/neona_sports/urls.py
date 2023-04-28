@@ -14,7 +14,7 @@ urlpatterns = [
     path('contact/', views.Contact, name="contact"),
     path('profile/', views.profile, name="profile"), 
     path('aboutus/', views.Aboutus, name='aboutus'),
-  
+ 
 ]
 
 

@@ -161,3 +161,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sishayd981@gmail.com'
 EMAIL_HOST_PASSWORD = 'gfekurhdbkgrvhdq'
 
+CSRF_TRUSTED_ORIGINS = ['https://your-domain.com', 'https://www.your-domain.com']
